@@ -59,8 +59,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             state.maybeWhen(
                               orElse: () {},
                               success: (authResponseModel) {
-                                AuthLocalDatasources()
-                                    .saveAuthData(authResponseModel);
+                                AuthLocalDatasources().saveAuthData(
+                                    authResponseModel.user!,
+                                    authResponseModel.token!);
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(

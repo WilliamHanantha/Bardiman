@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
               const ProgressIndicatorThemeData(color: Colors.amber),
           useMaterial3: true,
         ),
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

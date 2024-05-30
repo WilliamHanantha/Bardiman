@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bardimannn/data/data_sources/auth_local_datasource.dart';
 import 'package:bardimannn/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -47,6 +48,17 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ],
       ),
     );
+  }
+
+  Future<void> getAuthData() async {
+    final authData = await AuthLocalDatasources().getAuthData();
+    print(authData.username);
+  }
+
+  @override
+  void initState() {
+    getAuthData();
+    super.initState();
   }
 
   @override

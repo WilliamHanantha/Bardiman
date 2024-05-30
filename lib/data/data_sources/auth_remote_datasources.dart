@@ -32,7 +32,7 @@ class AuthRemoteDatasource {
 
   //make me register
   Future<Either<String, RegisterResponseModel>> register(
-      String username, String email, String password) async {
+      String email, String password, String username) async {
     final url = Uri.parse('${Variables.baseUrl}api/auth/register');
     final response = await http.post(
       url,
@@ -46,6 +46,7 @@ class AuthRemoteDatasource {
     final Map<String, dynamic> responseBody = json.decode(response.body);
 
     if (response.statusCode == 200) {
+      print(responseBody);
       getUserDetail(responseBody['data']['token']);
       return Right(RegisterResponseModel.fromJson(response.body));
     } else {
@@ -62,8 +63,7 @@ class AuthRemoteDatasource {
     });
 
     if (response.statusCode == 200) {
-      AuthLocalDatasources()
-          .saveAuthData(AuthResponseModel.fromJson(response.body));
+      AuthLocalDatasources().saveAuthData(User.fromJson(response.body), token!);
     } else {}
   }
 
