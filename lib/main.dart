@@ -85,9 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title, style: TextStyle(
-          color: AY1000
-        ),),
+        title: Text(
+          widget.title,
+          style: TextStyle(color: AY1000),
+        ),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -110,9 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             const Text(
               'You have pushed the button this many times:',
-              style: TextStyle(
-                fontSize: Fonts.txt4black
-              ),
             ),
             Text(
               '$_counter',
