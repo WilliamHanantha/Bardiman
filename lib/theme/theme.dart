@@ -621,8 +621,8 @@ class Fonts {
   );
 }
 
-const Color white = const Color(0xFFFFFFFF);
-const Color black = const Color(0xFF2B2D42);
+const Color White = const Color(0xFFFFFFFF);
+const Color Black = const Color(0xFF2B2D42);
 const Color AY100 = const Color(0xFFFEF8E6);
 const Color AY200 = const Color(0xFFFCF0CC);
 const Color AY300 = const Color(0xFFFAE199);
@@ -634,8 +634,8 @@ const Color AY800 = const Color(0xFFC29000);
 const Color AY900 = const Color(0xFF614800);
 const Color AY1000 = const Color(0xFF2B2D42);
 const Color AYshadow = const Color(0xFFDDA400);
-const Color grey = const Color(0xFFD9D9D9);
-const Color greybackground = const Color(0xFFF5F5F5);
-const Color lightgrey = const Color(0xFFCDCDCD);
-const Color greytxt = const Color(0xFF8B8D9C);
-const Color error = const Color(0xFFE9001E);
+const Color Grey = const Color(0xFFD9D9D9);
+const Color Greybackground = const Color(0xFFF5F5F5);
+const Color Lightgrey = const Color(0xFFCDCDCD);
+const Color Greytxt = const Color(0xFF8B8D9C);
+const Color Error = const Color(0xFFE9001E);
