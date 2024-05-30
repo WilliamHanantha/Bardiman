@@ -1,8 +1,10 @@
 import 'package:bardimannn/data/data_sources/auth_remote_datasources.dart';
+import 'package:bardimannn/data/models/register_response_model.dart';
 import 'package:bardimannn/presenstation/auth/bloc/login/login_bloc.dart';
+import 'package:bardimannn/presenstation/auth/bloc/register/register_bloc.dart';
 import 'package:bardimannn/presenstation/splash_screen/splash_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:bardimannn/theme/theme.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LoginBloc(AuthRemoteDatasource()),
         ),
+        BlocProvider(create: (context) => RegisterBloc(AuthRemoteDatasource())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

@@ -15,7 +15,9 @@ class OptionSection extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            // Navigator.pushNamed(context, RegisterScreen.routeName);
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const RegisterScreen();
+            }));
           },
           child: shareWidget().buttonTextOutline(
               "Register",
