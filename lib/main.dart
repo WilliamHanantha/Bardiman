@@ -1,5 +1,4 @@
 import 'package:bardimannn/data/data_sources/auth_remote_datasources.dart';
-import 'package:bardimannn/data/models/register_response_model.dart';
 import 'package:bardimannn/presenstation/auth/bloc/login/login_bloc.dart';
 import 'package:bardimannn/presenstation/auth/bloc/register/register_bloc.dart';
 import 'package:bardimannn/presenstation/splash_screen/splash_screen.dart';

@@ -1,5 +1,4 @@
 import 'package:bardimannn/data/models/auth_response_model.dart';
-import 'package:bardimannn/data/models/register_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthLocalDatasources {

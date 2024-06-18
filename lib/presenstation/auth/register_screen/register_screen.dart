@@ -22,6 +22,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController ctrusername = new TextEditingController();
   TextEditingController ctremail = new TextEditingController();
   TextEditingController ctrpassword = new TextEditingController();
+  TextEditingController ctrphone = new TextEditingController();
+  TextEditingController ctrgender = new TextEditingController();
+  TextEditingController ctrdate = new TextEditingController();
+  TextEditingController ctrmonth = new TextEditingController();
+  TextEditingController ctryear = new TextEditingController();
   bool isLoading = false;
   bool isLoaded = false;
 
@@ -175,6 +180,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ctremail: ctremail,
                                     ctrpassword: ctrpassword,
                                     ctrusername: ctrusername,
+                                    ctrphone: ctrphone,
+                                    ctrgender: ctrgender,
+                                    ctrdate: ctrdate,
+                                    ctrmonth: ctrmonth,
+                                    ctryear: ctryear,
                                     onTap: () {
                                       context.read<RegisterBloc>().add(
                                           RegisterEvent.register(
