@@ -5,27 +5,146 @@ import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
 class shareWidget {
-  Widget textboxOutline(String hintText, bool obscureText,
-      TextInputType keyboardType, TextEditingController controller) {
-    return TextField(
-      controller: controller,
-      obscureText: obscureText,
-      keyboardType: keyboardType,
-      cursorColor: AY600,
-      style: Fonts.txt12medium,
-      decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AY600, width: 2.0),
-          borderRadius: BorderRadius.circular(10),
+  Widget textboxOutline(String title, String hintText, bool obscureText,
+      TextInputType keyboardType, TextEditingController controller,
+      {bool isPassword = false}) {
+    final ValueNotifier<bool> isSaw = ValueNotifier<bool>(false);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: Fonts.txt14medium),
+        const Gap(16),
+        isPassword
+            ? ValueListenableBuilder<bool>(
+                valueListenable: isSaw,
+                builder: (BuildContext context, bool value, Widget? child) {
+                  return TextField(
+                    controller: controller,
+                    obscureText: value ? false : true,
+                    keyboardType: TextInputType.text,
+                    cursorColor: AY600,
+                    style: Fonts.txt12medium,
+                    decoration: InputDecoration(
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          isSaw.value = !isSaw.value;
+                        },
+                        child: Icon(
+                            value ? Icons.visibility : Icons.visibility_off,
+                            color: Black),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AY600, width: 2.0),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Greytxt),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 25),
+                      hintText: hintText,
+                      hintStyle: Fonts.txt12regular.copyWith(color: Greytxt),
+                    ),
+                  );
+                },
+              )
+            : TextField(
+                controller: controller,
+                obscureText: obscureText,
+                keyboardType: keyboardType,
+                cursorColor: AY600,
+                style: Fonts.txt12medium,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AY600, width: 2.0),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Greytxt),
+                  ),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  hintText: hintText,
+                  hintStyle: Fonts.txt12regular.copyWith(color: Greytxt),
+                ),
+              ),
+        const Gap(16)
+      ],
+    );
+  }
+
+  Widget phoneNumberField(
+      String title, String hintText, TextEditingController controller) {
+    controller.text = '+62  ';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: Fonts.txt14medium),
+        const Gap(16),
+        TextField(
+          controller: controller,
+          keyboardType: TextInputType.phone,
+          cursorColor: AY600,
+          style: Fonts.txt12medium,
+          decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AY600, width: 2.0),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Greytxt),
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            hintText: hintText,
+            hintStyle: Fonts.txt12regular.copyWith(color: Greytxt),
+          ),
+          onChanged: (String value) {
+            if (value.length < 4) {
+              controller.text = '+62 ';
+              controller.selection = TextSelection.fromPosition(
+                  TextPosition(offset: controller.text.length));
+            }
+          },
         ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+        const Gap(16)
+      ],
+    );
+  }
+
+  Widget dropDownButton(String title, String hintText, List<String> items,
+      String value, Function(String?) onChanged) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: Fonts.txt14medium),
+        const Gap(16),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            border: Border.all(color: Color(0xFF8C8476)),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: DropdownButton<String>(
+            value: value,
+            hint: Text(hintText),
+            style: Fonts.txt12regular,
+            isExpanded: true,
+            underline: Container(),
+            items: items.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: onChanged,
+          ),
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-        hintText: hintText,
-        hintStyle: Fonts.txt12regular.copyWith(color: Greytxt),
-      ),
+        const Gap(16),
+      ],
     );
   }
 
@@ -294,6 +413,15 @@ class shareWidget {
 
   bool isMobile(BuildContext context) =>
       MediaQuery.of(context).size.width < 550;
+
+  void showToast(BuildContext context, String message) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
 }
 
 class shareValue {
@@ -313,4 +441,19 @@ extension StringCasingExtension on String {
       .join(' ');
   String priceFormat() => replaceAllMapped(
       new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
+}
+
+class navPush {
+  static push(BuildContext context, Widget widget) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
+  }
+
+  static pushReplacement(BuildContext context, Widget widget) {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => widget));
+  }
+
+  static pop(BuildContext context) {
+    Navigator.pop(context);
+  }
 }

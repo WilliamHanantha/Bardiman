@@ -1,3 +1,4 @@
+import 'package:bardimannn/presenstation/auth/register_screen/register_screen.dart';
 import 'package:bardimannn/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -19,52 +20,23 @@ class FormSectionLogin extends StatefulWidget {
 }
 
 class _FormSectionLoginState extends State<FormSectionLogin> {
-  String errorText = "";
-  bool isSaw = false;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text("Email Adress", style: Fonts.txt14medium),
-          const Gap(16),
-          shareWidget().textboxOutline("Insert Email Adress", false,
-              TextInputType.text, widget.ctremail),
-          const Gap(16),
-          Text("Password", style: Fonts.txt14medium),
-          const Gap(16),
-          TextField(
-            controller: widget.ctrpassword,
-            obscureText: isSaw ? false : true,
-            keyboardType: TextInputType.text,
-            cursorColor: AY600,
-            style: Fonts.txt12medium,
-            decoration: InputDecoration(
-              suffixIcon: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isSaw = !isSaw;
-                  });
-                },
-                child: Icon(isSaw ? Icons.visibility : Icons.visibility_off,
-                    color: Black),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AY600, width: 2.0),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-              hintText: "Insert Passwod",
-              hintStyle: Fonts.txt12regular.copyWith(color: Greytxt),
-            ),
-          ),
+          shareWidget().textboxOutline("Email Adress", "Insert Email Adress",
+              false, TextInputType.text, widget.ctremail),
+          shareWidget().textboxOutline(
+            "Password",
+            "Insert Password",
+            true,
+            TextInputType.text,
+            widget.ctrpassword,
+            isPassword: true,
+          )
         ]),
-        const Gap(16),
         Row(
           children: [
             Spacer(),
@@ -89,7 +61,7 @@ class _FormSectionLoginState extends State<FormSectionLogin> {
             Text("Don't have an Bardiman account? ", style: Fonts.txt14regular),
             GestureDetector(
                 onTap: () {
-                  // Navigator.pushNamed(context, RegisterScreen.routeName);
+                  navPush.push(context, const RegisterScreen());
                 },
                 child: Text("Register",
                     style: Fonts.txt14regular.copyWith(color: AY600))),

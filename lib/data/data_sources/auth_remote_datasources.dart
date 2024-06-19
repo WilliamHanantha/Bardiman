@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:bardimannn/core/constant/variables.dart';
+import 'package:bardimannn/data/data_sources/auth_local_datasource.dart';
 import 'package:bardimannn/data/models/auth_response_model.dart';
+import 'package:bardimannn/data/models/register_response_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:dartz/dartz.dart';
 
@@ -26,6 +28,43 @@ class AuthRemoteDatasource {
       final String errorMessage = responseBody['message'] ?? 'Unknown error';
       return Left(errorMessage);
     }
+  }
+
+  //make me register
+  Future<Either<String, RegisterResponseModel>> register(
+      String email, String password, String username) async {
+    final url = Uri.parse('${Variables.baseUrl}api/auth/register');
+    final response = await http.post(
+      url,
+      headers: {"Accept": "application/json"},
+      body: {
+        'username': username,
+        'email': email,
+        'password': password,
+      },
+    );
+    final Map<String, dynamic> responseBody = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      print(responseBody);
+      getUserDetail(responseBody['data']['token']);
+      return Right(RegisterResponseModel.fromJson(response.body));
+    } else {
+      final String errorMessage = responseBody['message'] ?? 'Unknown error';
+      return Left(errorMessage);
+    }
+  }
+
+  Future<void> getUserDetail(String? token) async {
+    final url = Uri.parse('${Variables.baseUrl}api/user');
+    final response = await http.get(url, headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token"
+    });
+
+    if (response.statusCode == 200) {
+      AuthLocalDatasources().saveAuthData(User.fromJson(response.body), token!);
+    } else {}
   }
 
   //Logout
