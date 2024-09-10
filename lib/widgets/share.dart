@@ -194,7 +194,7 @@ class shareWidget {
     );
   }
 
-  Widget buttonTextOutline(String text, TextStyle style, Border borderColor,
+  Widget buttonText(String text, TextStyle style, Border borderColor,
       Color fillColor, double Width, double Height) {
     return Container(
       width: Width,

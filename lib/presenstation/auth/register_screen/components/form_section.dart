@@ -3,7 +3,7 @@ import 'package:bardimannn/widgets/share.dart';
 import 'package:datepicker_dropdown/datepicker_dropdown.dart';
 import 'package:datepicker_dropdown/order_format.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+// import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gap/gap.dart';
 
 import '../../login_screen/login_screen.dart';

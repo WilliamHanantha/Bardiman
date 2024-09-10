@@ -12,7 +12,6 @@ import 'components/header_section.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterScreen extends StatefulWidget {
-  static String routeName = "/registerscreen";
   const RegisterScreen({Key? key}) : super(key: key);
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();

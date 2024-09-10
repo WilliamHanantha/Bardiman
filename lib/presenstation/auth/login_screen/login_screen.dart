@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class LoginScreen extends StatefulWidget {
-  static String routeName = "/loginscreen";
   const LoginScreen({Key? key}) : super(key: key);
 
   @override

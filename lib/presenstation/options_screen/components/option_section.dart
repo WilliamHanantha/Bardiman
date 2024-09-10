@@ -15,11 +15,9 @@ class OptionSection extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const RegisterScreen();
-            }));
+           navPush.push(context, const RegisterScreen());
           },
-          child: shareWidget().buttonTextOutline(
+          child: shareWidget().buttonText(
               "Register",
               Fonts.txt16medium.copyWith(color: White),
               Border.all(color: AY600),
@@ -30,13 +28,9 @@ class OptionSection extends StatelessWidget {
         const Gap(20),
         GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ));
+            navPush.push(context, const LoginScreen());
           },
-          child: shareWidget().buttonTextOutline(
+          child: shareWidget().buttonText(
               "Login",
               Fonts.txt16medium.copyWith(color: AY600),
               Border.all(color: AY600),

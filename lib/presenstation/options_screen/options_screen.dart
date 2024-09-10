@@ -1,11 +1,14 @@
 import 'dart:io';
+import 'package:bardimannn/presenstation/auth/register_screen/register_screen.dart';
 import 'package:bardimannn/presenstation/options_screen/components/body_section.dart';
 import 'package:bardimannn/presenstation/options_screen/components/option_section.dart';
+import 'package:bardimannn/presenstation/profile_screen/profile_screen.dart';
+import 'package:bardimannn/theme/theme.dart';
+import 'package:bardimannn/widgets/share.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class OptionsScreen extends StatefulWidget {
-  static String routeName = "/optionsscreen";
   const OptionsScreen({Key? key}) : super(key: key);
 
   @override
@@ -48,6 +51,19 @@ class _OptionsScreenState extends State<OptionsScreen> {
               Gap(80),
               BodyOptions(),
               Expanded(child: Container()),
+              GestureDetector(
+                onTap: () {
+                  navPush.push(context, const ProfileScreen());
+                },
+                child: shareWidget().buttonText(
+                    "Bypass Profile",
+                    Fonts.txt16medium.copyWith(color: White),
+                    Border.all(color: AY600),
+                    AY600,
+                    140,
+                    60),
+              ),
+              const Gap(20),
               OptionSection()
             ],
           ),
